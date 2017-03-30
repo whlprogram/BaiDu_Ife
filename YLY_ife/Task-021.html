@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task-021</title>
+    <style>
+        .clearfix:after{
+            content: ".";
+            display: block;
+            clear: both;
+            height: 0;
+            visibility: hidden;
+        }
+        ul li {
+            display: inline-block;
+            float: left;
+            width: 160px;
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            border: 2px solid #cccccc;
+            margin: 10px;
+        }
+
+        .tag-area li:hover,.favo-area li:hover {
+            background-color: #cd4a48;
+            color: white;
+        }
+        .favo-area li:hover::before,.tag-area li:hover::before{
+            content: "点击删除 ";
+        }
+        .favo-input {
+            display: block;
+            width: 200px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <span class="tag">Tag</span>
+    <input type="text" id="tag-input">
+    <ul class="tag-area clearfix">
+    </ul>
+
+    <textarea id="favo-input" type="text">江蛤蛤，蛤三篇,哈斯、蛤啤   蛤宝 大新闻 华莱士</textarea>
+    <button class="btn">确认兴趣爱好</button>
+    <ul class="favo-area clearfix">
+    </ul>
+    <script>
+        /*
+        *TAG：
+        * 监听输入框，当按下逗号，空格，回车时获取当前输入框的value
+        * 遍历数组tag与value对比，如果不重复则在第一个元素前压入value
+        * 调用tag数组的输出方法，生成新的li节点
+        * 给新节点添加监听删除的监听器
+        * 单击元素时，通过监听器获取点击元素，设置display为none，遍历数组，使用数组的splic方法删除元素
+        * */
+        var tag=[];
+        var str=[];
+        var TAGSIZE=10;
+        var tagInput=document.getElementById("tag-input");
+        var txtInput=document.getElementById("favo-input");
+        //监听函数
+        tagInput.addEventListener("input",tagListener,false);
+        function tagListener(event) {
+            var txt=event.currentTarget.value;
+            if(txt.charAt(txt.length-1)==","||txt.charAt(txt.length-1)==" "){
+                addToTag(txt.substring(0,txt.length-1));
+                writeTag();
+                tagDelete();
+            }
+        }
+        function keyBorderListener() {
+            var txt=event.currentTarget.value;
+            if(event.keyCode==13||event.keyCode==44||event.keyCode==32){
+                addToTag(txt.trim());
+                writeTag();
+                tagDelete();
+            }
+        }
+        tagInput.addEventListener("keydown",keyBorderListener,false);
+
+        document.getElementsByClassName("btn")[0].addEventListener("click",function () {
+            var innerText=document.getElementById("favo-input").value;
+            addToTextArea(innerText);
+            writeFavo();
+            favoDelete();
+        },false);
+        
+        //传值给数组
+        function addToTag(x) {
+            for(var i=0;i<tag.length;i++){
+                if(x===tag[i]){
+                    tagInput.value="";
+                    alert("Tag重复,请重新输入");
+                    return;
+                }
+            }
+            tag.unshift(x);
+            tag.length=TAGSIZE;
+            tagInput.value="";
+        }
+        function addToTextArea(text) {
+            for(var i=0;i<str.length;i++){
+                if(str[i]==text){
+                    alert("爱好重复");
+                    return;
+                }
+            }
+            str=str.concat(text.split(/[,，;；、\s\n]+/));
+        }
+        //输出数组
+        function writeTag() {
+            var fatherNode=document.getElementsByClassName("tag-area")[0].innerHTML="";
+            for(var i=0;i<tag.length;i++){
+                if(tag[i]){
+                    var fatherNode=document.getElementsByClassName("tag-area")[0];
+                    var newNode=document.createElement("li");
+                    newNode.innerHTML=tag[i];
+                    fatherNode.appendChild(newNode);
+                }
+            }
+        }
+        function writeFavo() {
+            txtInput.value="";
+            var fatherNode=document.getElementsByClassName("favo-area")[0].innerHTML="";
+            for(var i=0;i<str.length;i++){
+                if(str[i]){
+                    var fatherNode=document.getElementsByClassName("favo-area")[0];
+                    var newNode=document.createElement("li");
+                    newNode.innerHTML=str[i];
+                    fatherNode.appendChild(newNode);
+                }
+            }
+        }
+        //添加点击删除
+        function tagDelete() {
+            var liList=document.getElementsByClassName("tag-area")[0].getElementsByTagName("li");
+            for(var i=0;i<liList.length;i++){
+                liList[i].addEventListener("click",function () {
+                    event.currentTarget.style.display="none";
+                    for(var j=0;j<tag.length;j++){
+                        if(tag[j]==event.currentTarget.innerHTML){
+                            alert("您移除了元素 "+tag[j]);
+                            tag.splice(j,1);
+                        }
+                    }
+                },false);
+            }
+        }
+
+        function favoDelete() {
+            var liList=document.getElementsByClassName("favo-area")[0].getElementsByTagName("li");
+            for(var i=0;i<liList.length;i++){
+                liList[i].addEventListener("click",function () {
+                    event.currentTarget.style.display="none";
+                    for(var j=0;j<str.length;j++){
+                        if(str[j]==event.currentTarget.innerHTML){
+                            alert("您移除了元素 "+str[j]);
+                            str.splice(j,1);
+                        }
+                    }
+                },false);
+            }
+        }
+    </script>
+
+</body>
+</html>

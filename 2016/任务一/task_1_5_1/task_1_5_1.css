@@ -1,0 +1,116 @@
+*{
+	margin: 0px;  /*浏览器一般有默认内外边距，加上这两句就没了*/
+	padding: 0px;
+}
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 150%;
+	background-color: rgb(222,222,222);
+}
+#top { 
+	margin: 0px auto;
+	padding: 0px;
+	width: 100%;
+	height: 100px;
+	background-color: black; 
+}
+#link_1 {
+	margin: 0;
+	padding: 0;
+	float: right;
+	height: 100px;
+	line-height: 100px;
+}
+#link_1 a {
+    padding: 15px;
+    height: 80px;
+    text-decoration: none;
+    color: white;
+    line-height:60px;
+}
+
+#link_2 {
+	list-style-type:none;
+}
+div{
+	padding: 20px;
+	overflow:auto;
+	background-color: rgb(255,255,255);
+	border-right-style: ridge;
+	border-bottom-style: ridge;
+	box-shadow:0 2px 2px 0 rgb(0,0,0);		
+}
+h2{
+    font-size: 25px;
+    color: gray;	
+}
+h3{
+    font-size: 15px;
+    color: gray;	
+}
+figure{
+	width: 180px;
+	height: 150px;	
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	box-sizing:content-box;	
+    float:left;
+}
+figcaption{
+	text-align:center;
+}
+table{
+    border-collapse:collapse;
+    border-color: rgb(222,222,222);
+    width: 100%;
+}
+#first{
+	color:white;
+	background-color:black;
+	
+}
+#last{
+	color:black;
+    background-color: rgb(222,222,222)
+}
+.five h1{
+    border-left: 4px solid rgb(203,203,203);
+	line-height: 40px;	
+}
+.beizhu{
+	color: rgb(155,160,164);
+	font-size: 12px;
+}
+#submit{
+	width: 100%;
+	height:40px;
+	color: white;
+    border-radius: 10px;
+    background-color:blue;
+}
+footer {
+	height: 100px;
+	background-color: rgb(0,0,0);
+	color: white;
+	text-align: center;
+	line-height: 80px;
+}
+.left {
+    float: right;
+}
+.five{
+	margin:20px;
+	width:400px;	
+	overflow:auto;
+	float:right;
+}
+.five h1{
+	font-size: 20px;
+}
+.one,.two,.three,.four{
+	margin:20px 480px 20px 20px;
+}
+
+

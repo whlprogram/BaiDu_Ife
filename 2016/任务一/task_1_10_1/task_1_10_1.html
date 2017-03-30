@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>task_1_10_1</title>
+	<style type="text/css">
+		.container{
+			display:flex;
+			align-items:center; 
+			/*align-items属性定义项目在交叉轴上如何对齐*/
+			/*center：交叉轴的中点对齐。*/
+			
+			justify-content:space-between; 
+			/*justify-content属性定义了项目在主轴上的对齐方式*/
+			/*space-between：两端对齐，项目之间的间隔都相等。*/
+		}
+		[class*='rectangle_']{
+			border:1px solid red;
+			padding:20px;
+			width:150px;
+			flex:0 0 150px;
+		}
+		.rectangle_1{height:120px;}
+		.rectangle_2{height:100px;}
+		.rectangle_3{height:40px;}
+		.rectangle_4{
+			height:200px;
+			border-color:blue;
+		}
+		@media screen and (max-width: 640px){
+			.rectangle_4{ 
+				order: -1;
+				/*order属性定义项目的排列顺序。
+				数值越小，排列越靠前，默认为0。*/
+			}
+			.container{
+				display:flex;
+				align-items:flex-start;
+				/*flex-start：交叉轴的起点对齐。*/
+				
+				flex-wrap:wrap;  /*换行*/
+			}
+		}		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="rectangle_1">150*120</div>
+		<div class="rectangle_2">150*100</div>
+		<div class="rectangle_3">150*40</div>
+		<div class="rectangle_4">150*200</div>
+	</div>
+</body>
+</html>

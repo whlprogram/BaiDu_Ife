@@ -1,0 +1,41 @@
+img{
+    width:80px;
+    height:80px;
+}
+nav{
+	width:97%;
+	overflow:auto;
+	font-family:Verdana,Helvetica,Arial,sans-serif;
+	background-color:#eee;	
+}
+div,nav{
+	padding:20px;
+}
+div,nav,img{
+	border:1px solid #999;
+}
+div{
+	background-color:white;
+}
+.team_name{
+    width: 200px;
+	overflow:auto;
+    float:left;
+}
+.team_logo{
+	margin:20px;
+	vertical-align: text-top;
+}
+.team_introduction{
+	margin:0 180px 0 260px;
+	text-align:center;
+	font-size:20px;
+}
+.self_logo{	
+	width:120px;	
+	overflow:auto;
+	float:right;	
+}
+.logo{
+    margin:10px 0px 10px 20px;
+}

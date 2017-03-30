@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
+  <button id="button">确认填写</button>
+
+  <div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
+
+<script type="text/javascript">
+
+(function() {
+     //click() 方法可模拟在按钮上的一次鼠标单击
+	document.getElementById('button').onclick = function()
+	{
+		var num;
+			document.getElementById('aqi-display').innerHTML =
+					isNaN(num = Number(document.getElementById('aqi-input').value.trim() || '~')) ? '请输入数值' : num;
+	};
+	
+	
+	/*
+	var inputValue=document.getElementById("aqi-input");
+	var inputButton=document.getElementById("button");
+	var spanIntext=document.getElementById("aqi-display");
+	inputButton.onclick=function(){
+		if (inputValue.value){
+			spanIntext.innerText=inputValue.value;
+		}
+		else{
+			spanIntext.innerText="请在输入栏输入天气质量";
+		}
+	}
+	*/
+	
+
+})();
+
+</script>
+</body>
+</html>

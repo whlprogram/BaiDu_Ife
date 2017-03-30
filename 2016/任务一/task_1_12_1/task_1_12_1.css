@@ -1,0 +1,81 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	font-family: "Microsoft Yahei";
+}
+.table{
+	margin:20px;
+	text-align:left;
+	background-color:#fff;
+	color:black;
+}
+#white{
+	background-color:black;
+	color:white;
+}
+.red{color:red;}
+.black{color:black;}
+.table tr:nth-child(2n+1){
+background:gray;
+}
+#inputself input{
+	margin:20px;
+	height:20px;
+	width:100px;
+}
+#inputself input:focus{
+	/*:focus选择器：当元素获得光标焦点时使用的样式，主要用在文本框输入文字时使用；*/
+	width:300px;
+}
+.Banner{
+	position:relative; 
+	width:300px;
+	overflow:hidden;
+	margin:20px;
+}
+.color{
+	width:300%;
+	height:100%;
+	position:relative;
+	left:0;	
+	font-family:100px;
+	transition:1s left;
+	text-align:center;
+	color:black;
+}
+.color li{
+	display:inline-block;
+	list-style:none;
+	width:300px;
+	height:100px;
+}
+.color li:nth-child(1){background-color:red;}
+.color li:nth-child(2){background-color:yellow;}
+.color li:nth-child(3){background-color:blue;}
+.Banner_control a:visited{color:#ccc}
+#img1:target~.color{left:0;}
+#img2:target~.color{left:-100%;}
+#img3:target~.color{left:-200%;}
+.Banner_control{
+	float:right;	
+	width:90px;
+	height:30px;
+	position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.Banner_control a{
+	display:inline-block;
+	float:left;
+	width:30px;
+	height:30px;
+	background:white;
+	text-align:center;
+	opacity:0.5;/*opacity 属性设置元素的不透明级别*/
+}
+.Banner_control a:hover{	
+	/*:hover选择器：当鼠标悬停在所指定的元素上时所使用的样式；*/
+	background:#405871;
+}

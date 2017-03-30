@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  //选出空气指数大于60的城市
+  var SerPollution = aqiData.filter(function (moreThan){
+	return(moreThan[1] > 60);
+	//语法 ：array1.filter(callbackfn[, thisArg])
+    //对数组array1中的每个元素调用回调函数callbackfn方法，
+	//该方法会返回一个在回调函数中返回true的元素的新的集合。
+	//可选参数thisArg可以替换回调函数中的this对象
+  });
+  
+  //对于空气指数大于60的城市排序
+  SerPollution.sort(function(a, b){
+    return b[1] - a[1];
+/*
+定义和用法：
+sort() 方法用于对数组的元素进行排序。
+语法：
+arrayObject.sort(sortby)
+描述：
+sortby    可选。规定排序顺序。必须是函数。    
+返回值：
+对数组的引用。请注意，数组在原数组上进行排序，不生成副本。
+说明：
+如果调用该方法时没有使用参数，将按字母顺序对数组中的元素进行排序，说得更精确点，是按照字符编码的顺序进行排序。要实现这一点，首先应把数组的元素都转换成字符串（如有必要），以便进行比较。
+如果想按照其他标准进行排序，就需要提供比较函数，该函数要比较两个值，然后返回一个用于说明这两个值的相对顺序的数字。比较函数应该具有两个参数 a 和 b，其返回值如下：
+若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。
+若 a 等于 b，则返回 0。
+若 a 大于 b，则返回一个大于 0 的值。
+*/
+  });
+  //结果显示
+  var aqiList = document.getElementById("aqi-list");
+  for(var i = 0;i < SerPollution.length;i++){
+	aqiList.innerHTML += "<li>第" + (i+1) + '名:"' + SerPollution[i][0] + '"&nbsp&nbsp,&nbsp&nbsp' + SerPollution[i][1] + "</li>" 
+  }
+})();
+
+</script>
+</body>
+</html>

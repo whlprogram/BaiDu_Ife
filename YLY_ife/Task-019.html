@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task-018</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .clearfix:after{
+            content: ".";
+            clear: both;
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+        #input {
+            display: block;
+            float: left;
+            margin: 15px;
+        }
+        body {
+            background-color: rgba(6, 6, 10, 0.76);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .btn-area {
+            margin: 15px auto;
+        }
+        ul .btn-li {
+            display: inline-block;
+        }
+        .btn-li button {
+            padding: 10px;
+            display: block;
+            /*float: left;*/
+        }
+        .page {
+            align-self: flex-end;
+            text-align: center;
+            line-height: 70px;
+            width: 50px;
+            height: 200px;
+            background-color: red;
+            margin: 10px;
+            color: #cccccc;
+        }
+        .page-area {
+            display: flex;
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="input">
+<div class="btn-area">
+    <ul>
+        <li class="btn-li clearfix"><button id="left-in">左侧入</button></li>
+        <li class="btn-li clearfix"><button id="right-in">右侧入</button></li>
+        <li class="btn-li clearfix"><button id="left-out">左侧出</button></li>
+        <li class="btn-li clearfix"><button id="right-out">右侧出</button></li>
+        <li class="btn-li clearfix"><button id="random">随机生成一组数据</button></li>
+        <li class="btn-li clearfix"><button id="sorting">排序</button></li>
+    </ul>
+</div>
+<div class="page-area clearfix">
+</div>
+<script>
+    var array=[];
+
+    function addItem(x,num) {
+        if(array.length>60){
+            alert("数组已满");
+        } else if(num<10||num>100){
+            alert("数字范围为10~100");
+            return;
+        }
+        switch (x){
+            case 0:
+                array.unshift(num);
+                break;
+            case 1:
+                array.push(num);
+                break;
+            case 2:
+                array.shift();
+                break;
+            case 3:
+                array.pop();
+                break;
+        }
+        var li=document.getElementsByClassName("page-area")[0];
+        li.innerHTML="";
+        for(var i=0;i<array.length;i++){
+            var newNode=document.createElement("div");
+            newNode.className="page";
+            newNode.style.height=array[i]*2+"px";
+            newNode.setAttribute("title",array[i]);
+            li.appendChild(newNode);
+        }
+    }
+
+    function clearInput() {
+        document.getElementById("input").value="";
+    }
+
+    document.getElementById("left-in").addEventListener("click",function () {
+        var num=document.getElementById("input").value;
+        addItem(0,num);
+        clearInput();
+        addListener();
+    },false);
+
+    document.getElementById("right-in").addEventListener("click",function () {
+        var num=document.getElementById("input").value;
+        addItem(1,num);
+        clearInput();
+        addListener();
+    },false);
+
+    document.getElementById("left-out").addEventListener("click",function () {
+        addItem(2);
+        addListener();
+    },false);
+
+    document.getElementById("right-out").addEventListener("click",function () {
+        addItem(3);
+        addListener();
+    },false);
+	 
+
+    document.getElementById("sorting").addEventListener("click",function () {
+        var i = 0,j = 0;
+        var len = array.length;	
+    
+            for(var i=0;i<len-1;i++){
+                for(var j=0;j<len-i-1;j++){
+                    if (array[j]<array[j+1]) {
+                        var temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;												
+                    }                   					
+                }                    					                                   
+            }
+			array.sort(function(a,b) {
+				return a-b;
+	        });
+            addItem();
+            addListener();
+        
+    },false);
+//    随机生成数据
+    document.getElementById("random").addEventListener("click",function () {
+        for(var i=0;i<60;i++){
+            array[i]=Math.floor(Math.random()*91+9);
+        }
+        addItem();
+        addListener();
+    },false);
+//    每次数组发生变化，重新进行监听器的添加
+    function addListener(){
+        for(var k=0;k<array.length;k++){
+            var littleDiv=document.getElementsByClassName("page");
+            littleDiv[k].addEventListener("click",function () {
+               event.currentTarget.remove;
+            })
+        }
+    }
+
+
+</script>
+</body>
+</html>

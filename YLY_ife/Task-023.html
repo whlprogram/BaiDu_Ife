@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task-023</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #root {
+            float: left;
+            position: absolute;
+            margin-left: -252px;
+            left: 50%;
+        }
+        div {
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid #8c8c8c;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .btn {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            margin-left: -277px;
+        }
+        .btn button {
+            padding: 10px;
+            margin: 15px;
+        }
+    </style>
+</head>
+<body>
+<form>
+    <div id="root" title="1">1
+        <div title="2">2
+            <div title="3">3
+                <div title="4">4</div>
+            </div>
+            <div title="5">5</div>
+            <div title="6">6</div>
+        </div>
+        <div title="7">7
+            <div title="8">8</div>
+            <div title="9">9
+                <div title="10">10</div>
+            </div>
+        </div>
+        <div title="11">11
+            <div title="12">12</div>
+        </div>
+    </div>
+</form>
+    <div class="btn">
+        <input id="input">
+        <button id="pre" onclick="bPs(root),showOut()">广度优先查找</button>
+        <button id="in" onclick="dPs(root),showOut(dPsQueue)">深度优先查找</button>
+        <button id="reset" onclick="reSet()">重置</button>
+
+    </div>
+    <script>
+        var queue=[],current,
+                root=document.getElementById("root");
+        //广度优先
+//        1：把当前节点放入队列，如果节点有nextElementSibling，访问旁边节点并放入队列，
+//        当节点的nextElementSibling为假时，说明当前层已经访问完毕，
+//        2：队列shift第一个出来（即当前层的第一个节点)，通过firstElementChild到达下一层，重复1操作
+//        重复1，2操作，直到队列为空
+        var bPsQueue=[];
+        function bPs(node) {
+            if(node){
+                bPsQueue.push(node);
+                queue.push(node);
+                if(node.nextElementSibling){
+                    arguments.callee(node.nextElementSibling);
+                }
+                node=bPsQueue.shift();
+                arguments.callee(node.firstElementChild);
+            }
+        }
+
+//        function dPs(node){
+//            if(node){
+//                queue.push(node);
+//                arguments.callee(node.firstElementChild);
+//                if(node.nextElementSibling){
+//                    queue.push(node.nextElementSibling);
+//                    arguments.callee(node.nextElementSibling);
+//                }
+//            }
+        //深度优先遍历
+//        1.把node push进队列，通过.firstElementChild 到达下一层，直到没有子节点
+//        2.队列shift第一个出来，即返回最开始的层级，通过nextElementSibling，访问旁边节点并放入队列
+//        3.循环1.2
+        var dPsQueue=[];
+        function dPs(node) {
+            if(node){
+                dPsQueue.push(node);
+                queue.push(node);
+                if(node.firstElementChild){
+                    arguments.callee(node.firstElementChild);
+                }
+                node=dPsQueue.shift();
+                arguments.callee(node.nextElementSibling);
+            }
+        }
+        function getTile() {
+            return document.getElementById("input").value;
+        }
+        function showOut(){
+            current = queue.shift();
+            if(current){
+                current.style.backgroundColor = '#00B2EE';
+                timer = setTimeout(function(){
+                    current.style.backgroundColor = '#fff';
+                    showOut();
+                },600);
+                if(current.title==getTile()){
+                   clearInterval(timer);
+                    document.getElementById("input").value="";
+                    alert("get it");
+                    return;
+                }
+            }else{
+                alert("can't get it");
+            }
+        }
+        function reSet() {
+            dPsQueue=[],bPsQueue=[];
+            let allDiv=root.getElementsByTagName("div");
+            for(let i=0;i<allDiv.length;i++){
+                allDiv[i].style="";
+            }
+        }
+    </script>
+</body>
+</html>
